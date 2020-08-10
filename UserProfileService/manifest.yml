@@ -1,0 +1,9 @@
+applications:
+- name: UserProfileService
+  disk_quota: 1G
+  instances: 1
+  memory: 1G
+  path: target/UserProfileService-0.0.1-SNAPSHOT.jar
+  routes:
+  - route: userprofileservice-empathic-porcupine-us.cfapps.io
+  stack: cflinuxfs3

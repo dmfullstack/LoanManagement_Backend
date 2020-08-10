@@ -1,0 +1,9 @@
+applications:
+- name: LoanAppDiscoveryService
+  disk_quota: 1G
+  instances: 1
+  memory: 1G
+  path: target/LoanAppDiscoveryService-0.0.1-SNAPSHOT.jar
+  routes:
+  - route:  loanappdiscoveryservice.cfapps.io
+  stack: cflinuxfs3

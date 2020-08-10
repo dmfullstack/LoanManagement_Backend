@@ -1,0 +1,9 @@
+applications:
+- name: AuthenticationService
+  disk_quota: 1G
+  instances: 1
+  memory: 1G
+  path: target/AuthenticationService-0.0.1-SNAPSHOT.jar
+  routes:
+  - route: authenticationservice-empathic-porcupine-us.cfapps.io
+  stack: cflinuxfs3

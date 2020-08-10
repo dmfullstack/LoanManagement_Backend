@@ -1,0 +1,17 @@
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      default-zone: http://localhost:8761/eureka
+      
+spring:
+ application:
+    name: LoanApiGateway
+server:
+  port: 8091
+zuul: 
+  routes:
+    authenticationservice.url: http://localhost:8081/
+    loanservice.url: http://localhost:8084/
+    userprofileservice.url: http://localhost:8082/

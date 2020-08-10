@@ -1,0 +1,9 @@
+applications:
+- name: LoanAppZuulApiGateway
+  disk_quota: 1G
+  instances: 1
+  memory: 1G
+  path: target/LoanAppZuulApiGateway-0.0.1-SNAPSHOT.jar
+  routes:
+  - route: loanappzuulapigateway.cfapps.io
+  stack: cflinuxfs3
