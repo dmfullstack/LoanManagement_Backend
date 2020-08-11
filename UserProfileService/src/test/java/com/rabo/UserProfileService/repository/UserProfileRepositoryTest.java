@@ -45,7 +45,7 @@ public class UserProfileRepositoryTest {
 	}
 
 	@Test
-	public void registerUserTest() {
+	public void addUserTest() {
 
 		userProfileRepository.save(userProfile);
 		UserProfile fetcheduser = userProfileRepository.findById("Jhon123").get();
