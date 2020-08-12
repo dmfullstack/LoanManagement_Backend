@@ -23,8 +23,6 @@ import com.rabo.UserProfileService.model.UserProfile;
 import com.rabo.UserProfileService.service.UserProfileService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api/v1")
 public class UserProfileController {
 
 	private UserProfileService userService;
@@ -34,17 +32,19 @@ public class UserProfileController {
 		this.userService = userProfileService;
 	}
 
-	@PostMapping("/user")
+	@PostMapping("userprofileservice/api/v1/user")
 	public ResponseEntity<?> registerUserProfile(@RequestBody UserProfile user) {
 
 		ResponseEntity<?> entity;
 		HashMap<String, String> map = new HashMap<String, String>();
 		try {
-			if (!user.getUserId().isEmpty() && !user.getEmail().isEmpty() && !user.getFirstName().isEmpty()
-					&& !user.getLastName().isEmpty() && !user.getContact().isEmpty()) {
+			
+			if (!user.getUserId().isEmpty()) {
+				
 				userService.registerUser(user);
 				map.put("message", "User Registration Successfull");
 				entity = new ResponseEntity<>(map, HttpStatus.CREATED);
+				
 			} else {
 				map.put("message", "fields should not be empty");
 				entity = new ResponseEntity<>(map, HttpStatus.BAD_REQUEST);
@@ -57,7 +57,7 @@ public class UserProfileController {
 
 	}
 
-	@PutMapping("/userprofile/{userId}")
+	@PutMapping("userprofileservice/api/v1/userprofile/{userId}")
 	public ResponseEntity<?> updateUserProfile(@PathVariable("userId") String userId, @RequestBody UserProfile user) {
 
 		try {
@@ -69,7 +69,7 @@ public class UserProfileController {
 
 	}
 
-	@DeleteMapping("/userprofile/{userId}")
+	@DeleteMapping("userprofileservice/api/v1/userprofile/{userId}")
 	public ResponseEntity<?> deleteUserProfile(@PathVariable("userId") String userId) {
 
 		ResponseEntity<?> entity;
@@ -82,29 +82,12 @@ public class UserProfileController {
 		return entity;
 	}
 
-	@GetMapping("/userprofile/{userId}")
+	@GetMapping("userprofileservice/api/v1/userprofile/{userId}")
 	public ResponseEntity<?> getUserProfileById(@PathVariable("userId") String userId) {
 
-		ResponseEntity<?> entity;
-//
-//		HashMap<String, List<UserProfile>> map = new HashMap<>();
-//
-//		List<UserProfile> listUser = new LinkedList<>();
-//		UserProfile user = null;
-//		try {
-//			user = userService.getUserById(userId);
-//
-//			listUser.add(user);
-//			map.put("profile", listUser);
-//			entity = new ResponseEntity<>(map, HttpStatus.OK);
-//		} catch (UserProfileNotFoundException e) {
-//			listUser.add(user);
-//			map.put("profile", listUser);
-//			entity = new ResponseEntity<>(map, HttpStatus.NOT_FOUND);
-//		}
-//		return entity;
+
 		try {
-		UserProfile user = userService.getUserById(userId);
+			UserProfile user = userService.getUserById(userId);
 
 			return new ResponseEntity<>(user, HttpStatus.OK);
 

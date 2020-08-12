@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.rabo.AuthenticationService.exception.UserAlreadyExistsException;
@@ -27,7 +28,7 @@ public class UserAuthController {
 		this.userAuthService = userAuthService;
 	}
 
-	@PostMapping("/api/v1/auth/register")
+	@PostMapping("authenticationservice/api/v1/auth/register")
 	public ResponseEntity<?> registerUser(@RequestBody User user) throws UserAlreadyExistsException {
 		try {
 
@@ -39,7 +40,7 @@ public class UserAuthController {
 
 	}
 
-	@PostMapping("/api/v1/auth/login")
+	@PostMapping("authenticationservice/api/v1/auth/login")
 	public ResponseEntity<?> login(@RequestBody User user) {
 
 		String jwtToken = null;

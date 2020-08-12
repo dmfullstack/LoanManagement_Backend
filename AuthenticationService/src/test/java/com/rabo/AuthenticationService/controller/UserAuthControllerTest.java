@@ -61,7 +61,7 @@ public class UserAuthControllerTest {
     public void testRegisterUser() throws Exception {
 
         Mockito.when(userAuthService.saveUser(user)).thenReturn(true);
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/auth/register").contentType(MediaType.APPLICATION_JSON).content(jsonToString(user)))
+        mockMvc.perform(MockMvcRequestBuilders.post("authenticationservice/apix/v1/auth/register").contentType(MediaType.APPLICATION_JSON).content(jsonToString(user)))
                 .andExpect(MockMvcResultMatchers.status().isCreated()).andDo(MockMvcResultHandlers.print());
 
     }
@@ -77,7 +77,7 @@ public class UserAuthControllerTest {
 
         Mockito.when(userAuthService.saveUser(user)).thenReturn(true);
         Mockito.when(userAuthService.findByUserIdAndPassword(userId, password)).thenReturn(user);
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/auth/login").contentType(MediaType.APPLICATION_JSON).content(jsonToString(user)))
+        mockMvc.perform(MockMvcRequestBuilders.post("authenticationservice/apix/v1/auth/login").contentType(MediaType.APPLICATION_JSON).content(jsonToString(user)))
                 .andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
     }
 

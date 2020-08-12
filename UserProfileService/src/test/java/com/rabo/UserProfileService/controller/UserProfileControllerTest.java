@@ -65,7 +65,7 @@ public class UserProfileControllerTest {
     public void registerUserSuccess() throws Exception {
 
         when(userProfileService.registerUser(userProfile)).thenReturn(userProfile);
-        mockMvc.perform(post("/api/v1/user")
+        mockMvc.perform(post("/userprofileservice/api/v1/user")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(userProfile)))
                 .andExpect(status().isCreated()).andDo(MockMvcResultHandlers.print());
 
@@ -75,7 +75,7 @@ public class UserProfileControllerTest {
     public void registerUserFailure() throws Exception {
 
         when(userProfileService.registerUser(any())).thenThrow(UserProfileAlreadyExistsException.class);
-        mockMvc.perform(post("/api/v1/user")
+        mockMvc.perform(post("/userprofileservice/api/v1/user")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(userProfile)))
                 .andExpect(status().isConflict()).andDo(MockMvcResultHandlers.print());
 
@@ -86,7 +86,7 @@ public class UserProfileControllerTest {
     public void updateUserSuccess() throws Exception {
     	userProfile.setContact("23456789");
         when(userProfileService.updateUser(eq(userProfile.getUserId()), any())).thenReturn(userProfile);
-        mockMvc.perform(put("/api/v1/userprofile/Jhon123")
+        mockMvc.perform(put("/userprofileservice/api/v1/userprofile/Jhon123")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(userProfile)))
                 .andExpect(status().isOk()).andDo(MockMvcResultHandlers.print());
 
@@ -96,7 +96,7 @@ public class UserProfileControllerTest {
     public void updateUserFailure() throws Exception {
     	    userProfile.setContact("23456789");
             when(userProfileService.updateUser(eq(userProfile.getUserId()), any())).thenThrow(UserProfileNotFoundException.class);
-            mockMvc.perform(put("/api/v1/userprofile/Jhon123")
+            mockMvc.perform(put("/userprofileservice/api/v1/userprofile/Jhon123")
                     .contentType(MediaType.APPLICATION_JSON).content(asJsonString(userProfile)))
                     .andExpect(status().isNotFound()).andDo(MockMvcResultHandlers.print());
 
@@ -105,7 +105,7 @@ public class UserProfileControllerTest {
     @Test
     public void deleteUserSuccess() throws Exception {
         when(userProfileService.deleteUser("Jhon123")).thenReturn(true);
-        mockMvc.perform(delete("/api/v1/userprofile/Jhon123")
+        mockMvc.perform(delete("/userprofileservice/api/v1/userprofile/Jhon123")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(MockMvcResultHandlers.print());
@@ -116,7 +116,7 @@ public class UserProfileControllerTest {
     @Test
     public void deleteUserFailure() throws Exception {
         when(userProfileService.deleteUser("Jhon123")).thenThrow(UserProfileNotFoundException.class);
-        mockMvc.perform(delete("/api/v1/userprofile/Jhon123")
+        mockMvc.perform(delete("/userprofileservice/api/v1/userprofile/Jhon123")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andDo(MockMvcResultHandlers.print());
@@ -128,7 +128,7 @@ public class UserProfileControllerTest {
     public void getByUserIdSuccess() throws Exception {
 
         when(userProfileService.getUserById("Jhon123")).thenReturn(userProfile);
-        mockMvc.perform(get("/api/v1/userprofile/Jhon123").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/userprofileservice/api/v1/userprofile/Jhon123").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andDo(MockMvcResultHandlers.print());
     }
@@ -137,7 +137,7 @@ public class UserProfileControllerTest {
     public void getByUserIdFAilure() throws Exception {
 
         when(userProfileService.getUserById("Jhon123")).thenThrow(UserProfileNotFoundException.class);
-        mockMvc.perform(get("/api/v1/userprofile/Jhon123").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/userprofileservice/api/v1/userprofile/Jhon123").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound())
                 .andDo(MockMvcResultHandlers.print());
     }

@@ -86,7 +86,7 @@ class LoanControllerTest {
 
 		when(loanService.addLoan(loan)).thenReturn(true);
 
-		mockMvc.perform(post("/api/v1/loan").contentType(MediaType.APPLICATION_JSON).content(asJsonString(loan)))
+		mockMvc.perform(post("/loanservice/api/v1/loan").contentType(MediaType.APPLICATION_JSON).content(asJsonString(loan)))
 				.andExpect(status().isCreated()).andDo(MockMvcResultHandlers.print());
 
 	}
@@ -105,7 +105,7 @@ class LoanControllerTest {
 	public void updateLoanSuccess() throws Exception {
 		loan.setLoanHandlingFees(5000);
 		when(loanService.updateLoan(any(), eq(loan.getLoanNo()))).thenReturn(loan);
-		mockMvc.perform(put("/api/v1/loan/111").contentType(MediaType.APPLICATION_JSON).content(asJsonString(loan)))
+		mockMvc.perform(put("/loanservice/api/v1/loan/111").contentType(MediaType.APPLICATION_JSON).content(asJsonString(loan)))
 				.andExpect(status().isOk()).andDo(MockMvcResultHandlers.print());
 
 	}
@@ -114,7 +114,7 @@ class LoanControllerTest {
 	public void updateLoanFailure() throws Exception {
 		loan.setLoanNo(111);
 		when(loanService.updateLoan(any(), eq(loan.getLoanNo()))).thenThrow(LoanNotFoundException.class);
-		mockMvc.perform(put("/api/v1/loan/111").contentType(MediaType.APPLICATION_JSON).content(asJsonString(loan)))
+		mockMvc.perform(put("/loanservice/api/v1/loan/111").contentType(MediaType.APPLICATION_JSON).content(asJsonString(loan)))
 				.andExpect(status().isNotFound()).andDo(MockMvcResultHandlers.print());
 
 	}
@@ -122,7 +122,7 @@ class LoanControllerTest {
 	@Test
 	public void deleteLoanSuccess() throws Exception {
 		when(loanService.deleteLoan(111)).thenReturn(true);
-		mockMvc.perform(delete("/api/v1/loan/111").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+		mockMvc.perform(delete("/loanservice/api/v1/loan/111").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andDo(MockMvcResultHandlers.print());
 
 	}
@@ -130,7 +130,7 @@ class LoanControllerTest {
 	@Test
 	public void deleteLoanFailure() throws Exception {
 		when(loanService.deleteLoan(111)).thenReturn(false);
-		mockMvc.perform(delete("/api/v1/loan/111").contentType(MediaType.APPLICATION_JSON))
+		mockMvc.perform(delete("/loanservice/api/v1/loan/111").contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotFound()).andDo(MockMvcResultHandlers.print());
 
 	}
@@ -139,7 +139,7 @@ class LoanControllerTest {
 	public void getByLoanNoSuccess() throws Exception {
 
 		when(loanService.getLoanByLoanNo(111)).thenReturn(loan);
-		mockMvc.perform(get("/api/v1/loan/111").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+		mockMvc.perform(get("/loanservice/api/v1/loan/111").contentType(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andDo(MockMvcResultHandlers.print());
 	}
 
@@ -147,7 +147,7 @@ class LoanControllerTest {
 	public void getByLoanNoFAilure() throws Exception {
 
 		when(loanService.getLoanByLoanNo(111)).thenThrow(LoanNotFoundException.class);
-		mockMvc.perform(get("/api/v1/loan/111").contentType(MediaType.APPLICATION_JSON))
+		mockMvc.perform(get("/loanservice/api/v1/loan/111").contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isNotFound()).andDo(MockMvcResultHandlers.print());
 	}
 

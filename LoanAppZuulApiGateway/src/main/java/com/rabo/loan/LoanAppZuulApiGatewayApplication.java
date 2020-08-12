@@ -25,7 +25,7 @@ public class LoanAppZuulApiGatewayApplication {
 	public FilterRegistrationBean<JwtFilter> jwtFilter() {
 		final FilterRegistrationBean<JwtFilter> filterRegistrationBean = new FilterRegistrationBean<JwtFilter>();
 		filterRegistrationBean.setFilter(new JwtFilter());
-		filterRegistrationBean.addUrlPatterns("/loanService/api/v1/loan/*");
+		filterRegistrationBean.addUrlPatterns("/loanservice/*");
 		return filterRegistrationBean;
 
 	}

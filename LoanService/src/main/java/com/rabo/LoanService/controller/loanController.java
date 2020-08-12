@@ -32,7 +32,7 @@ public class loanController {
 		this.service = service;
 	}
 
-	@PostMapping("/api/v1/loan")
+	@PostMapping("loanservice/api/v1/loan")
 	public ResponseEntity<?> saveLoan(@RequestBody Loan loan) {
 		try {
 			loan.setOriginationDate();
@@ -45,7 +45,7 @@ public class loanController {
 
 	}
 
-	@DeleteMapping("/api/v1/loan/{loanNo}")
+	@DeleteMapping("loanservice/api/v1/loan/{loanNo}")
 	public ResponseEntity<?> deleteLoan(@PathVariable("loanNo") int loanNo) throws LoanNotFoundException {
 
 		ResponseEntity<?> entity;
@@ -62,7 +62,7 @@ public class loanController {
 		return entity;
 	}
 
-	@PutMapping("/api/v1/loan/{loanNo}")
+	@PutMapping("loanservice/api/v1/loan/{loanNo}")
 	public ResponseEntity<?> updateLoan(@RequestBody Loan loan, @PathVariable("loanNo") int loanNo) {
 
 		try {
@@ -76,7 +76,7 @@ public class loanController {
 		}
 	}
 
-	@GetMapping("/api/v1/loan/search/{loanNo}")
+	@GetMapping("loanservice/api/v1/loan/search/{loanNo}")
 	public ResponseEntity<?> searchLoan(@PathVariable("loanNo") int loanNo) throws LoanNotFoundException {
 
 		List<Loan> listLoan = service.searchByLoanNo(loanNo);
@@ -84,7 +84,7 @@ public class loanController {
 
 	}
 
-	@GetMapping("/api/v1/loan/{loanNo}")
+	@GetMapping("loanservice/api/v1/loan/{loanNo}")
 	public ResponseEntity<?> getLoan(@PathVariable("loanNo") int loanNo) {
 		ResponseEntity<?> entity;
 		HashMap<String, List<Loan>> map = new HashMap<>();
@@ -105,7 +105,7 @@ public class loanController {
 		return entity;
 	}
 
-	@GetMapping("/api/v1/loan/user/{userId}")
+	@GetMapping("loanservice/api/v1/loan/user/{userId}")
 	public ResponseEntity<?> getAllLoanOfUser(@PathVariable("userId") String userId) {
 
 		List<Loan> allloan = service.getAllLoanByUser(userId);
@@ -113,7 +113,7 @@ public class loanController {
 
 	}
 
-	@GetMapping("/api/v1/loan/{userId}/{loanNo}")
+	@GetMapping("loanservice/api/v1/loan/{userId}/{loanNo}")
 	public ResponseEntity<?> searchLoanOfUser(@PathVariable("userId") String userId, @PathVariable("loanNo") int loanNo)
 			throws LoanNotFoundException {
 
@@ -122,7 +122,7 @@ public class loanController {
 
 	}
 
-	@GetMapping("/api/v1/loan")
+	@GetMapping("loanservice/api/v1/loan")
 	public ResponseEntity<?> getAllLoan() {
 		List<Loan> allloan = service.getAllLoan();
 		return new ResponseEntity<>(allloan, HttpStatus.OK);
